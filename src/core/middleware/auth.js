@@ -1,4 +1,4 @@
-const UserReader = require('../../module/users/model/read');
+const UserReader = require('../../module/user/model/read');
 const AuthenticationManager = require('../auth');
 
 class AuthMiddleWare{
@@ -24,4 +24,4 @@ class AuthMiddleWare{
           res.status(500).send(error.message);
         }
       }
-}
+}module.exports = AuthMiddleware;
