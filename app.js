@@ -8,6 +8,7 @@ var cors = require('cors');
 const userRouter = require('./src/module/users/route');
 // const addressRouter = require('./src/module/adresses/route')
 // const packageRouter =require('./src/module/packages/route')
+const AuthMiddleware = require('./src/core/middleware/auth');
 var app = express();
 
 
@@ -22,7 +23,7 @@ app.use('/users', userRouter);
 // app.use('/addresses', addressRouter);
 // app.use('/packages', packageRouter);
 
-app.post("/login", )
+app.post("/login", AuthMiddleware.login )
 
 app.use(function(err, req, res, next) {
     res.status(500).send("route not found");
