@@ -23,5 +23,22 @@ class AuthMiddleWare{
         } catch (error) {
           res.status(500).send(error.message);
         }
+    }
+        static jwtTokenValidation(req, res, next) {
+            try {
+              const jwtToken = req.cookies.token;
+              if (!jwtToken) {
+                throw new Error("Token not exists!");
+              }
+              
+              const payload = AuthenticationManager.getJwtTokenPayload(jwtToken);
+              req.jwt_payload = payload;
+              
+              next();
+            } catch (e) {
+              res.status(401).end();
+            }
+          }
       }
-}module.exports = AuthMiddleWare;
+
+      module.exports = AuthMiddleWare;
