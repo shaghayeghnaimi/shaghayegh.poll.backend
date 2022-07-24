@@ -4,12 +4,12 @@ const DatabaseManager = require('../../../core/database/databaseManager');
 class UserCreator {
   
   static createUser(userData) {
-    const {name, address_id} = userData;
+    const {user_name, email, pass, first_name, last_name} = userData;
     const query = `
-      insert into users
-      (name, address_id)
+      insert into user
+      (user_name, email, pass, first_name, last_name)
       values
-      ('${name}', ${address_id});
+      ('${user_name}', '${email}', '${pass}', '${first_name}'. '${last_name}' );
     `;
     return DatabaseManager.query(query);
   }
