@@ -1,7 +1,7 @@
 const DatabaseManager = require('../../../core/database/databaseManager');
+const bcrypt = require('bcrypt')
 
 class UserReader {
-  
   static async getAllUsers() {
     const query = `select * from user;`;
     const result = await DatabaseManager.query(query);
@@ -26,7 +26,6 @@ class UserReader {
         pass = '${pass}';
     `;
     const dbResult = await DatabaseManager.query(query);
-    console.log(dbResult);
     return dbResult[0];
   }
 }
