@@ -3,7 +3,7 @@ const DatabaseManager = require('../../../core/database/databaseManager');
 class UserReader {
   
   static async getAllUsers() {
-    const query = `select * from web.users;`;
+    const query = `select * from user;`;
     const result = await DatabaseManager.query(query);
     return result;
   }
@@ -11,21 +11,22 @@ class UserReader {
   static getUserById(userId) {
     const query = `
       select *
-      from web.users
+      from user
       where id = ${userId}
     `;
     return DatabaseManager.query(query);
   }
   
-  static async getUsersByEmailAndPassword(email, password) {
+  static async getUsersByEmailAndPassword(email, pass) {
     const query = `
-      select * from users
+      select * from user
       where
         email = '${email}'
       and
-        password = '${password}';
+        pass = '${pass}';
     `;
     const dbResult = await DatabaseManager.query(query);
+    console.log(dbResult);
     return dbResult[0];
   }
 }

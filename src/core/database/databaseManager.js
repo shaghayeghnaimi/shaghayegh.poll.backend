@@ -1,5 +1,5 @@
 const mysql2 = require('mysql2/promise');
-const secrets = require('../../config/index.js');
+const secrets = require('../../config/index');
 
 class DatabaseManager {
   constructor() {

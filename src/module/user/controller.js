@@ -3,8 +3,8 @@ const UserCreator = require("./models/create");
 
 class UserController {
   static async getAllUsers(req, res, next) {
-    const users = await UserReader.getAllUsers();
-    res.send(users);
+    const user = await UserReader.getAllUsers();
+    res.send(user);
   }
   
   static async getUserById(req, res, next) {
