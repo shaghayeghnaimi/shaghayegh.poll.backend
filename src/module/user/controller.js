@@ -1,7 +1,23 @@
 const UserReader = require("./models/read");
 const UserCreator = require("./models/create");
+const DatabaseManager = require('../../core/database/databaseManager');
+const saltRounds = 10;
+const bcrypt = require("bcrypt");
+
 
 class UserController {
+  static async updateUser(req, res){
+    try{
+      const id = req.params.id;
+      const {pass: pass} = req.body;
+      const hashedPass = await bcrypt.hash(pass, saltRounds)
+      const query =`update user set pass ='${hashedPass}' where id = ${id};`
+      const user = await DatabaseManager.query(query) ;
+      res.json(user[0])
+    }catch(err){
+      console.log('err :>> ', err);
+    }
+  }
   static async getAllUsers(req, res, next) {
     const user = await UserReader.getAllUsers();
     res.send(user);

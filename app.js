@@ -4,7 +4,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 require("dotenv").config();
 var app = express();
-const userRouter = require("./src/module/users/router");
+const userRouter = require("./src/module/user/router");
 const AuthMiddleware = require("./src/core/middleware/auth");
 
 
@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
-app.use("/users", userRouter);
+app.use("/user", userRouter);
 app.post("/login", AuthMiddleware.login);
 module.exports = app;
 
