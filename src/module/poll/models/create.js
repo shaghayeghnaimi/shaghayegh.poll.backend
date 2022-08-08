@@ -1,18 +1,18 @@
 const DatabaseManager = require('../../../core/database/databaseManager');
 
 
-class AddressCreator {
+class PollCreator {
   
-  static createAddress(addressData) {
-    const {city, street, allay, code, phone_number} = addressData;
+  static createPoll(addressData) {
+    const {title, description, user_id} = addressData;
     const query = `
       insert into adresses
-      (city, street, allay, code, phone_number)
+      (title, description, user_id)
       values
-      ('${city}', '${street}', '${allay}', '${code}', ${phone_number});
+      ('${title}', '${description}', ${user_id});
     `;
     return DatabaseManager.query(query);
   }
 }
 
-module.exports = AddressCreator;
+module.exports = PollCreator;
