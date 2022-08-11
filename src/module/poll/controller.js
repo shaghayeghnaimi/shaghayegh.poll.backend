@@ -1,16 +1,16 @@
-const AddressReader = require("./models/read");
+const PollReader = require("./models/read");
 const PollCreator = require("./models/create");
-const AddressUpdate = require("./models/update");
-const AddressDelete = require("./models/delete");
+// const AddressUpdate = require("./models/update");
+// const AddressDelete = require("./models/delete");
 class PollController {
-  // static async getAlladresses(req, res, next) {
-  //   try {
-  //     const addresses = await AddressReader.getAllAddresses();
-  //     res.send(addresses);
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // }
+  static async getAllPolls(req, res, next) {
+    try {
+      const polls = await PollReader.getAllPolls();
+      res.send(polls);
+    } catch (error) {
+      next(error);
+    }
+  }
 
   // static async getaddressById(req, res, next) {
   //   try {
@@ -25,8 +25,9 @@ class PollController {
 
   static async createPoll(req, res, next) {
     try {
-      const PollData = req.body;
-      const result = await PollCreator.createPoll(PollData);
+      const dataPoll = req.body;
+      const result = await PollCreator.createPoll(dataPoll);
+      console.log('result :>> ', result);
       res.send(result);
     } catch (error) {
       next(error);
