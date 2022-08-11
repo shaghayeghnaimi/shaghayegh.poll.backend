@@ -3,14 +3,15 @@ const DatabaseManager = require('../../../core/database/databaseManager');
 
 class PollCreator {
   
-  static createPoll(addressData) {
-    const {title, description, user_id} = addressData;
+  static createPoll(dataPoll) {
+    const {title, description} = dataPoll;
     const query = `
-      insert into adresses
-      (title, description, user_id)
+      insert into poll
+      (title, description)
       values
-      ('${title}', '${description}', ${user_id});
+      ('${title}', '${description}'});
     `;
+    console.log('query :>> ', query);
     return DatabaseManager.query(query);
   }
 }
