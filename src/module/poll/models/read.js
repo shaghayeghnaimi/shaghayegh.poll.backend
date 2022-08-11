@@ -1,18 +1,18 @@
 const DatabaseManager = require('../../../core/database/databaseManager');
 
-class AddressReader {
-  static async getAllAddresses() {
-    const query = "select * from adresses";
+class PollReader {
+  static async getAllPolls() {
+    const query = "select * from poll";
     const result = await DatabaseManager.query(query);
     return result;
   }
-  static getaddressById(addressId) {
-    const query = `
-      select *
-      from adresses
-      where id = ${addressId}
-    `;
-    return DatabaseManager.query(query);
-  }
+  // static getaddressById(addressId) {
+  //   const query = `
+  //     select *
+  //     from adresses
+  //     where id = ${addressId}
+  //   `;
+  //   return DatabaseManager.query(query);
+  // }
 }
-module.exports = AddressReader;
+module.exports = PollReader;
