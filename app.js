@@ -5,18 +5,26 @@ var logger = require("morgan");
 require("dotenv").config();
 var app = express();
 const userRouter = require("./src/module/user/router");
+const pollRouter = require("./src/module/poll/route");
 const AuthMiddleware = require("./src/core/middleware/auth");
-
+var cors = require('cors');
+var { errors } = require ("celebrate")
 
 
 app.use(logger("dev"));
+app.use(cors({origin: ["http://localhost:3000"]}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use("/user", userRouter);
 app.post("/login", AuthMiddleware.login);
-module.exports = app;
+app.use("/Poll", pollRouter);
+
+app.use(errors());
+
+
+
 
 
 // app.use('/addresses', addressRouter);
