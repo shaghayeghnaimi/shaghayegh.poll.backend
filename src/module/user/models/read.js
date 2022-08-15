@@ -1,5 +1,6 @@
 const DatabaseManager = require('../../../core/database/databaseManager');
-const bcrypt = require('bcrypt')
+const saltRounds = 10;
+const bcrypt = require("bcrypt");
 
 class UserReader {
   static async getAllUsers() {
@@ -17,13 +18,12 @@ class UserReader {
     return DatabaseManager.query(query);
   }
   
-  static async getUsersByEmailAndPassword(email, pass) {
+  static async getUsersByemail(email) {
+    // const hashedPass = await bcrypt.hash(pass, saltRounds);
     const query = `
       select * from user
       where
-        email = '${email}'
-      and
-        pass = '${pass}';
+        email = '${email}';
     `;
     const dbResult = await DatabaseManager.query(query);
     return dbResult[0];
