@@ -1,8 +1,9 @@
-const DatabaseManager = require('../../../core/database/databaseManager');
+const DatabaseManager = require("../../../core/database/databaseManager");
 
 class PollReader {
   static async getAllPolls() {
-    const query = "select * from poll";
+    const query =
+      "SELECT poll.title, poll.description, poll.link, count(participent.id) AS numOfParticipent FROM poll INNER JOIN participent ON poll.id = participent.poll_id group by poll_id;";
     const result = await DatabaseManager.query(query);
     return result;
   }

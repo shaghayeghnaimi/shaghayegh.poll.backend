@@ -1,11 +1,11 @@
 const express = require('express');
-const PollController = require('./controller');
+const ChoiceController = require('./controller');
 
 const router = express.Router();
 
 
-router.get('/', PollController.getAllPolls);
-router.post('/', PollController.createPoll);
+router.get('/', ChoiceController.getAllItems);
+router.post('/', ChoiceController.createChoice);
 // router.patch('/', AddressController.updateAddress )
 // router.delete('/', AddressController.deleteAddress)
 

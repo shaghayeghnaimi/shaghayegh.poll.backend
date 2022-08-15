@@ -1,12 +1,12 @@
-const PollReader = require("./models/read");
-const PollCreator = require("./models/create");
+const choiceReader = require("./models/read");
+const ChoiceCreator = require("./models/create");
 // const AddressUpdate = require("./models/update");
 // const AddressDelete = require("./models/delete");
-class PollController {
-  static async getAllPolls(req, res, next) {
+class ChoiceController {
+  static async getAllItems(req, res, next) {
     try {
-      const polls = await PollReader.getAllPolls();
-      res.send(polls);
+      const items = await choiceReader.getAllItems();
+      res.send(items);
     } catch (error) {
       next(error);
     }
@@ -23,11 +23,10 @@ class PollController {
   // }
   // res;
 
-  static async createPoll(req, res, next) {
+  static async createChoice(req, res, next) {
     try {
-      const dataPoll = req.body;
-      const userId = req.loggedInUserData.id
-      const result = await PollCreator.createPoll(userId, dataPoll);
+      const dataChoice = req.body;
+      const result = await ChoiceCreator.createChoice(dataChoice);
       console.log('result :>> ', result);
       res.send(result);
     } catch (error) {
@@ -55,4 +54,4 @@ class PollController {
   // }
 }
 
-module.exports = PollController;
+module.exports = ChoiceController;

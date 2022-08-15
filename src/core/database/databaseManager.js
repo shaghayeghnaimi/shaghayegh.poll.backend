@@ -7,6 +7,7 @@ class DatabaseManager {
   }
   
   async query(sqlQuery) {
+    console.log('sqlQuery :>> ', sqlQuery);
     const result = await this.poolConnection.query(sqlQuery);
     return result[0];
   }
