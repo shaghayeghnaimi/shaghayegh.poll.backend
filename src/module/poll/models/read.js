@@ -3,7 +3,7 @@ const DatabaseManager = require("../../../core/database/databaseManager");
 class PollReader {
   static async getAllPolls() {
     const query =
-      "SELECT poll.title, poll.description, poll.link, count(participent.id) AS numOfParticipent FROM poll INNER JOIN participent ON poll.id = participent.poll_id group by poll_id;";
+      "SELECT poll.title, poll.id, poll.description, poll.link, COUNT(participent.id) AS numOfParticipent FROM poll Left JOIN participent ON poll.id = participent.poll_id group by poll_id;";
     const result = await DatabaseManager.query(query);
     return result;
   }
