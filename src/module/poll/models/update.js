@@ -1,17 +1,17 @@
 const DatabaseManager = require('../../../core/database/databaseManager');
 
 
-class AddressUpdate {
+class PollUpdate {
   
-  static updateAddress(addressData) {
-    const {id, city, street, allay, code, phone_number} = addressData;
+  static updatePoll(dataPoll) {
+    const {title, description, id} = dataPoll;
     const query = `
-    UPDATE packages
-    SET city = '${city}', street = '${street}', allay = '${allay}', code = '${code}', phone_number = ${phone_number}
+    UPDATE poll
+    SET title = '${title}', description = '${description}'
     WHERE id= ${id} ;
     `;
     return DatabaseManager.query(query);
   }
 }
 
-module.exports = AddressUpdate;
+module.exports = PollUpdate;
