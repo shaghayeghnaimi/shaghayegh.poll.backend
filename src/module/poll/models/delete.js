@@ -1,17 +1,10 @@
-const DatabaseManager = require('../../../core/database/databaseManager');
+const DatabaseManager = require("../../../core/database/databaseManager");
 
-
-class AddressDelete {
-  
-  static deleteAddress(addressData) {
-    const {id} = addressData;
-    const query = `
-    DELETE FROM packages WHERE id= ${id};
-
-    `;
-
+class PollDelete {
+  static deletePoll(pollId) {
+    const query = `DELETE FROM poll WHERE id = ${pollId};`;
     return DatabaseManager.query(query);
   }
 }
 
-module.exports = AddressDelete;
+module.exports = PollDelete;
