@@ -1,18 +1,15 @@
-const DatabaseManager = require('../../../core/database/databaseManager');
+const DatabaseManager = require("../../../core/database/databaseManager");
 
-
-class PackageCreator {
-  
-  static createPackage(packageData) {
-    const {reciever_id, sender_id, trackingNumber, weight,price} = packageData;
+class ChoicesCreator {
+  static createChoice(choiceData) {
+    const { item_id, participent_id } = choiceData;
     const query = `
-      insert into packages
-      (reciever_id, sender_id, trackingNumber, weight,price)
-      values
-      (${reciever_id}, ${sender_id}, ${trackingNumber}, '${weight}',  '${price}');
-    `;
+    INSERT INTO participent_choice 
+    (choice_id, participent_id)  
+    VALUES
+    (${item_id}, ${participent_id});`;
     return DatabaseManager.query(query);
   }
+  
 }
-
-module.exports = PackageCreator;
+module.exports = ChoicesCreator;

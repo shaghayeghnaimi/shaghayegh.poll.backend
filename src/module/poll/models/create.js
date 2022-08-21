@@ -7,12 +7,13 @@ class PollCreator {
     const {title, description} = dataPoll;
     const query = `
       insert into poll
-      (title, description, user_id, link)
+      (title, description, user_id)
       values
-      ('${title}', '${description}', ${userId}, "jdfhgbjksdf");
+      ('${title}', '${description}', ${userId} );
     `;
-    console.log('query :>> ', query);
+
     return DatabaseManager.query(query);
+
   }
 }
 

@@ -1,0 +1,13 @@
+{
+    "deploy":{
+    "targets":[{
+        "type":"sftp",
+        "name":"shaghayeghjnaimi.ir",
+        "host":"shaghayeghjnaimi.ir",
+        "port":22,
+        "dir":"/root/backend",
+        "user":"root",
+        "password":"XUfvn6dua2"
+    }]
+},
+}

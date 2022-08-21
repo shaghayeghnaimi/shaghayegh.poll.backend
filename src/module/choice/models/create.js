@@ -1,19 +1,18 @@
-const DatabaseManager = require('../../../core/database/databaseManager');
+const DatabaseManager = require("../../../core/database/databaseManager");
 
-
-class ChoiceCreator {
-  
-  static createChoice(dataChoice) {
-    const {item} = dataChoice;
+class ItemCreator {
+  static async createItem(ItemData) {
+    const { poll_id, item } = ItemData;
     const query = `
-      insert into choice
-      (item)
-      values
-      ('${item}');
-    `;
-    console.log('query :>> ', query);
-    return DatabaseManager.query(query);
+    INSERT INTO choice
+    (poll_id, item)  
+    VALUES
+    (${poll_id},'${item}');`;
+  
+    const result = await DatabaseManager.query(query);
+    return result;
+  
   }
+  
 }
-
-module.exports = ChoiceCreator;
+module.exports = ItemCreator;

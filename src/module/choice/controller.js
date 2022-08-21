@@ -1,34 +1,39 @@
-const choiceReader = require("./models/read");
-const ChoiceCreator = require("./models/create");
-// const AddressUpdate = require("./models/update");
-// const AddressDelete = require("./models/delete");
-class ChoiceController {
-  static async getAllItems(req, res, next) {
+const ItemReader = require("./models/read");
+const ItemCreator = require("./models/create");
+const DatabaseManager = require("../../core/database/databaseManager");
+
+class ItemController {
+  static async getItemsByPollId(req, res, next) {
     try {
-      const items = await choiceReader.getAllItems();
+      const pollId = req.query.id;
+      const items = await ItemReader.getItemsByPollId(pollId);
       res.send(items);
     } catch (error) {
       next(error);
     }
   }
 
-  // static async getaddressById(req, res, next) {
-  //   try {
-  //     const addressId = req.params.id;
-  //     const result = await AddressReader.getaddressById(addressId);
-  //     res.send(result);
-  //   } catch (error) {
-  //     next(error);
-  //   }
-  // }
-  // res;
-
-  static async createChoice(req, res, next) {
+  static async getItemById(req, res, next) {
     try {
-      const dataChoice = req.body;
-      const result = await ChoiceCreator.createChoice(dataChoice);
-      console.log('result :>> ', result);
+      const ItemId = req.params.id;
+      const result = await ItemReader.getItemById(ItemId);
       res.send(result);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+
+  static async createItem(req, res, next) {
+    try {
+      const dataItem = req.body;
+      dataItem.forEach(async (item) => {
+        await ItemCreator.createItem(item);
+      });
+      const pollId = dataItem[0].poll_id;
+      const query = `SELECT id FROM poll WHERE id= ${pollId}`;
+      await DatabaseManager.query(query);
+  
     } catch (error) {
       next(error);
     }
@@ -54,4 +59,4 @@ class ChoiceController {
   // }
 }
 
-module.exports = ChoiceController;
+module.exports = ItemController;

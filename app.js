@@ -6,6 +6,9 @@ require("dotenv").config();
 var app = express();
 const userRouter = require("./src/module/user/router");
 const pollRouter = require("./src/module/poll/router");
+const choiceRouter = require("./src/module/choice/router");
+const participentRouter = require("./src/module/participent/router");
+const participentChoiceRouter = require("./src/module/participent-choice/router");
 const AuthMiddleware = require("./src/core/middleware/auth");
 var cors = require('cors');
 var { errors } = require ("celebrate")
@@ -20,6 +23,11 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/user", userRouter);
 app.post("/login", AuthMiddleware.login);
 app.use("/poll", pollRouter);
+app.use("/choice", choiceRouter);
+app.use("/participent", participentRouter);
+app.use("/choices", participentChoiceRouter);
+
+
 
 app.use(errors());
 

@@ -1,18 +1,20 @@
 const DatabaseManager = require('../../../core/database/databaseManager');
 
-class choiceReader {
-  static async getAllItems() {
-    const query = "select * from choice";
+class ItemReader {
+  static async getItemsByPollId(pollId) {
+    const query = `select item, id from choice where poll_id=${pollId}`;
     const result = await DatabaseManager.query(query);
+    
     return result;
   }
-  // static getaddressById(addressId) {
-  //   const query = `
-  //     select *
-  //     from adresses
-  //     where id = ${addressId}
-  //   `;
-  //   return DatabaseManager.query(query);
-  // }
+  static getItemById(ItemId) {
+    const query = `
+      select *
+      from choice
+      where id = ${ItemId}
+    `;
+    return DatabaseManager.query(query);
+  }
+
 }
-module.exports = choiceReader;
+module.exports = ItemReader;

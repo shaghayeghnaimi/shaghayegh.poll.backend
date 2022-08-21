@@ -15,6 +15,7 @@ class UserController {
   static async getUserById(req, res, next) {
     try {
       const userId = req.params.id;
+     
       if (userId != req.loggedInUserData.id) {
         throw new Error("YOU can not get other users data");
       }

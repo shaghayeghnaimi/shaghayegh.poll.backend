@@ -17,7 +17,8 @@ class AuthMiddleware {
         if (passEqual) {
           const payload = {
             user: { id: user.id, 
-              email: user.email },
+              email: user.email, 
+           },
           };
           const jwt = AuthenticationManager.getJwtToken(payload);
           res.send(jwt);

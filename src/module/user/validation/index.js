@@ -4,11 +4,11 @@ class UserValidator {
   
   static createUserSchema = celebrate({
     [Segments.BODY]: Joi.object().keys({
-      first_name: Joi.string().required(),
-      last_name: Joi.string().default("teymori"),
-      mobile: Joi.string().required(),
+      first_name: Joi.string(),
+      last_name: Joi.string(),
+      user_name: Joi.string(),
       email: Joi.string().email().required(),
-      password: Joi.string().min(5).required(),
+      pass: Joi.string().min(5).required(),
     }),
   });
   

@@ -1,54 +1,68 @@
-const PackageReader = require("./models/read");
-const PackageCreator = require("./models/create");
-const PackageUpdate = require("./models/update");
-const PackageDelete = require("./models/delete");
-class PackageController {
-  static async getAllPackags(req, res, next) {
-    try {
-      const packages = await PackageReader.getAllPackages();
-      res.send(packages);
-    } catch (error) {
-      next(error);
-    }
-  }
+const ChoicesReader = require("./models/read");
+const ChoicesCreator = require("./models/create");
+const DatabaseManager = require("../../core/database/databaseManager");
 
-  static async getPackageById(req, res, next) {
+class ChoicesController {
+  static async getChoiceById(req, res, next) {
     try {
-      const packageId = req.params.id;
-      const result = await PackageReader.getPackageById(packageId);
+      const choiceId = req.params.id;
+      const result = await ChoicesReader.getChoiceById(choiceId);
       res.send(result);
     } catch (error) {
       next(error);
     }
   }
 
-  static async createPackage(req, res, next) {
+  static async getChoiceByItemId(req, res, next) {
     try {
-      const packageData = req.body;
-      const result = await PackageCreator.createPackage(packageData);
+      const itemId = req.params.id;
+      const result = await ChoicesReader.getChoiceByItemId(itemId);
       res.send(result);
     } catch (error) {
       next(error);
     }
   }
-  static async updatePackage(req, res, next) {
-    try {
-      const packageData = req.body;
-      const result = await PackageUpdate.updatePackage(packageData);
-      res.send(result);
-    } catch (error) {
-      next(error);
-    }
-  }
-  static async deletePackage(req, res, next) {
-    try {
-      const packageData = req.body;
-      const result = await PackageDelete.deletePackage(packageData);
-      res.send(result);
-    } catch (error) {
-      next(error);
-    }
-  }
-}
 
-module.exports = PackageController;
+  static async getChoiceByPollId(req, res, next) {
+    try {
+      const pollId = req.params.id;
+      console.log('req :>> ', req);
+      const result = await ChoicesReader.getChoiceByPollId(pollId);
+      res.send(result);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+    static async createChoice(req, res, next) {
+      try {
+        const choiceData = req.body;
+        const result = await ChoicesCreator.createChoice(choiceData);
+        res.send(result);
+      } catch (error) {
+        next(error);
+      }
+    }
+  }
+
+  // static async updateAddress(req, res, next) {
+  //   try {
+  //     const addressData = req.body;
+  //     const result = await AddressUpdate.updateAddress(addressData);
+  //     res.send(result);
+  //   } catch (error) {
+  //     next(error);
+  //   }
+  // }
+  // static async deleteAddress(req, res, next) {
+  //   try {
+  //     const addressData = req.body;
+  //     const result = await AddressDelete.deleteAddress(addressData);
+  //     res.send(result);
+  //   } catch (error) {
+  //     next(error);
+  //   }
+  // }
+
+
+module.exports = ChoicesController;

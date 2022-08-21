@@ -1,18 +1,32 @@
-const DatabaseManager = require('../../../core/database/databaseManager');
+const DatabaseManager = require("../../../core/database/databaseManager");
 
-class PackageReader {
-  static async getAllPackages() {
-    const query = "select * from packages";
-    const result = await DatabaseManager.query(query);
-    return result;
-  }
-  static getPackageById(PackageId) {
+class ChoicesReader {
+
+
+  static getChoiceById(choiceId) {
     const query = `
-      select *
-      from packages
-      where id = ${PackageId}
-    `;
+    SELECT * 
+    FROM participent_choice
+    WHERE ID = ${choiceId};`;
+    return DatabaseManager.query(query);
+  }
+
+  static getChoiceByItemId(itemId) {
+    const query = `
+    SELECT *
+    FROM
+	  participent_choice
+	  INNER JOIN choice ON participent_choice.choice_id = choice.id
+    WHERE	choice.id = ${itemId};`;
+    return DatabaseManager.query(query);
+  }
+  static getChoiceByPollId(pollId) {
+    const query = `
+    SELECT *
+    FROM
+	  participent_choice
+    WHERE	poll_idd = ${pollId};`;
     return DatabaseManager.query(query);
   }
 }
-module.exports = PackageReader;
+module.exports = ChoicesReader;
